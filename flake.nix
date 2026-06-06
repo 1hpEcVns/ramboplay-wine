@@ -24,6 +24,7 @@
           curl
           unzip
           caddy
+          dxvk
         ];
 
         ASPNETCORE_URL = "https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/5.0.17/aspnetcore-runtime-5.0.17-win-x86.zip";
@@ -40,7 +41,6 @@
             7z x -y ramboply.2.2.6_full.7z
             echo "[ramboplay] Extraction complete."
           fi
-
           # Install ASP.NET Core 5.0 runtime in wine prefix if missing
           DOTNET_DIR="$WINEPREFIX/drive_c/Program Files (x86)/dotnet"
           if [ ! -f "$DOTNET_DIR/host/fxr/5.0.17/hostfxr.dll" ]; then
@@ -50,6 +50,13 @@
             unzip -o /tmp/aspnetcore5.zip -d "$DOTNET_DIR" > /dev/null
             rm -f /tmp/aspnetcore5.zip
             echo "[ramboplay] ASP.NET Core 5.0.17 installed."
+          fi
+
+          # Install DXVK for GPU acceleration (WebView2/Chromium rendering)
+          if [ ! -f "$WINEPREFIX/drive_c/windows/system32/dxgi.dll" ]; then
+            echo "[ramboplay] Installing DXVK for GPU acceleration..."
+            setup_dxvk.sh install --symlink
+            echo "[ramboplay] DXVK installed."
           fi
 
           echo ""
