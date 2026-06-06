@@ -19,14 +19,13 @@
 
         nativeBuildInputs = with pkgs; [
           p7zip
-          wineWow64Packages.stable
+          wineWow64Packages.staging
           winetricks
           curl
           unzip
           caddy
           dxvk
         ];
-
         ASPNETCORE_URL = "https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/5.0.17/aspnetcore-runtime-5.0.17-win-x86.zip";
 
         shellHook = ''
