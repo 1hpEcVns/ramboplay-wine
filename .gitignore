@@ -1,0 +1,20 @@
+# Extracted game files (large)
+# App runtime logs
+${specialfolder:folder=LocalApplicationData}/${processname}/
+client/
+res/
+ramboplay.ra2.exe
+start.bat
+使用说明.txt
+args.txt
+D4E98A60FC0C.txt
+
+# Archive
+*.7z
+
+# Wine prefix
+.wine/
+
+# Nix
+result
+.direnv
