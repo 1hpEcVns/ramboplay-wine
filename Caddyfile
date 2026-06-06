@@ -1,0 +1,28 @@
+# Local proxy: combines remote frontend with local backend
+:3601 {
+    log {
+        output stdout
+        level info
+    }
+
+    # API requests -> wine backend on :3600
+    handle /api/* {
+        reverse_proxy localhost:3600
+    }
+
+    # WebSocket -> wine backend
+    handle /ws* {
+        reverse_proxy localhost:3600
+    }
+
+    handle /hubs* {
+        reverse_proxy localhost:3600
+    }
+
+    # Everything else -> remote frontend
+    handle {
+        reverse_proxy https://client.ok-skins.com {
+            header_up Host {http.reverse_proxy.upstream.hostport}
+        }
+    }
+}

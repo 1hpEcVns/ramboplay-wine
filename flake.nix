@@ -23,6 +23,7 @@
           winetricks
           curl
           unzip
+          caddy
         ];
 
         ASPNETCORE_URL = "https://builds.dotnet.microsoft.com/dotnet/aspnetcore/Runtime/5.0.17/aspnetcore-runtime-5.0.17-win-x86.zip";
@@ -56,14 +57,18 @@
           echo "  Ramboplay (蓝博玩) RA2 — Wine Environment"
           echo "============================================"
           echo ""
-          echo "  Run the launcher server:"
+          echo "  Terminal 1 — start the backend:"
           echo "    wine client/ramboplay.ra2.exe"
           echo ""
-          echo "  Then open in your browser:"
-          echo "    http://localhost:3600"
+          echo "  Terminal 2 — start the local proxy:"
+          echo "    caddy run --config Caddyfile"
           echo ""
-          echo "  Note: WebView2 GPU renderer crashes"
-          echo "  under wine; use a native browser."
+          echo "  Then open in your browser:"
+          echo "    http://localhost:3601"
+          echo ""
+          echo "  The proxy combines the remote frontend"
+          echo "  (client.ok-skins.com) with the local"
+          echo "  backend so everything is same-origin."
           echo "============================================"
           echo ""
         '';
