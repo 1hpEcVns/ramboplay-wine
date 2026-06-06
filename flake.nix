@@ -59,7 +59,14 @@
             echo "[ramboplay] DXVK installed."
           fi
 
-          echo ""
+          # Install CJK fonts for Chinese text rendering
+          if [ ! -f "$WINEPREFIX/drive_c/windows/Fonts/cjkfonts.installed" ]; then
+            echo "[ramboplay] Installing CJK + core fonts..."
+            winetricks -q cjkfonts corefonts fakechinese 2>/dev/null
+            touch "$WINEPREFIX/drive_c/windows/Fonts/cjkfonts.installed"
+            echo "[ramboplay] Fonts installed."
+          fi
+
           echo "============================================"
           echo "  Ramboplay (蓝博玩) RA2 — Wine Environment"
           echo "============================================"
